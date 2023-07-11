@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Around the world{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+    <h1>Welcome to our forum<i class="fas fa-globe-americas"></i> <i class="fas fa-search"></i></h1>
+    
+</div>
+
+
+    {% for el in threads %}
+        {% if forloop.counter <= 2 %}
+            <div class="threads">
+                <h3>{{ el.title }}</h3>
+                <p>{{ el.full_text }}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

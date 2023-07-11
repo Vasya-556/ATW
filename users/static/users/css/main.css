@@ -1,0 +1,23 @@
+/* .login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    height: 100vh;
+    width: 100vh;
+} */
+
+.change-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    height: 100vh;
+  width: 100vw;
+  background-color: tan;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

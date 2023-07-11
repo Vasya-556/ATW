@@ -1,0 +1,19 @@
+{% extends 'main/layout.html' %}
+
+{% block title%}Threads{% endblock %}
+
+{% block content%}
+
+    {% for el in threads%}
+        <div class="threads">
+            <h3>{{el.title}}</h3>
+            <p>{{el.full_text}}</p>
+            <ul>
+                {% for comment in el.comments.all %}
+                    <li>{{ comment.text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor%}
+
+{% endblock%}

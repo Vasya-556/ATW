@@ -1,0 +1,43 @@
+.sidebar {
+    position: fixed;
+    float: left;
+    top: 0;
+    width: 5.5vh;
+    height: 100vh;
+    background-color: aqua;
+    padding: 8px;
+    color: #4d4d4d;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.sidebar ul li {
+    list-style: none;
+}
+
+.sidebar button {
+    transform: rotate(90deg);
+}
+
+.topbar {
+    padding-left: 80vh;
+    padding-top: 20px;
+}
+
+.threads {
+    word-wrap: break-word;
+    margin-left: 35vh;
+    margin-top: 2%;
+    width: 1050px;
+    border: 5px solid #602424;
+}
+
+.threads h3 {
+    display: flex;
+    justify-content: center;
+}
+
+.threads p {
+    text-indent: 20px;
+    margin: 10px;
+}

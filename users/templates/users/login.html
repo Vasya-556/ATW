@@ -13,16 +13,29 @@
 <body>
     <main>
         <div class="change-form">
-            <button onclick="registration" id="registration-button">registration</button>
-            <button onclick="enter" id="enter-button">enter</button>
+            <button onclick="toggleRegistration()" id="registration-button">registration</button>
+            <button onclick="toggleEnter()" id="enter-button">enter</button>
         </div>
         
-        <div class="registration">
+        <div class="registration" id="registration-div">
+            <input type="text" id="email-input" placeholder="Email(login)"><br>
+            <input type="text" id="nickname-input" placeholder="Nickname"><br>
+            <input type="password" id="password-input" placeholder="Create password"><br>
+            <input type="password" id="repeat-password-input" placeholder="Repeat password"><br>
+            <input type="date" id="dob-input" placeholder="Date of birth"><br>
+            <label>
+              Sex:<br>
+              <input type="radio" name="radiobutton" value="Male"> Male<br>
+              <input type="radio" name="radiobutton" value="Female"> Female<br>
+              <input type="radio" name="radiobutton" value="Other" checked> Don't want to say<br>
+            </label><br>
+            <button onclick="createUser()">Registration</button>
+          </div>
 
-        </div>
-
-        <div class="enter">
-            
+        <div class="enter" id="enter-div">
+            <input type="text" placeholder="login"><br>
+            <input type="password" placeholder="password"><br>
+            <button>Enter</button>
         </div>
     </main>
 </body>

@@ -1,12 +1,22 @@
 from django.db import models
-import datetime
+
+def default_avatar():
+    return 'avatars/default_avatar.jpg'
 
 class User(models.Model):
-    nickname = models.CharField('Nickname', max_length=20)
-    login = models.CharField('Login', max_length=20, default='login')
-    password = models.CharField('Password', max_length=20, default='password')
-    sex = models.CharField('Sex', max_length=10, default='none')
-    date = models.DateField('Date of Registration')
-    about = models.CharField('About', max_length=250)
-    photo = models.ImageField('Photo', upload_to='user_photos/')
-    dob = models.DateField('Date of birth', default=datetime.date(2012, 12, 12).strftime('%Y-%m-%d'))
+    UserName = models.CharField(max_length=20)
+    Email = models.EmailField(unique=True)
+    Password = models.CharField(max_length=20)
+    Sex = models.CharField(max_length=10)
+    #DOB - Date of birth
+    DOB = models.DateField()
+    #DOR - Date of registration
+    DOR = models.DateTimeField(auto_now_add=True)
+    #LLD - Last Login Date
+    LLD = models.DateTimeField(auto_now=True)
+    Avatar = models.ImageField(upload_to='avatars/', default=default_avatar, null=True, blank=True)
+    #AD - Additional Data
+    AD = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.UserName

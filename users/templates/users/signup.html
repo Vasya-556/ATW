@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+    <div class="signup">
+        <input type="text" placeholder="User name">
+        <input type="text" placeholder="Email(login)">
+        <input type="password" placeholder="Create password">
+        <input type="password" placeholder="Repeat password">
+        <input type="date" placeholder="Date of birth">
+        <div class="radio-container">
+            <label for="">sex:</label>
+            <label for="radio">
+              <input type="radio" name="gender" value="male"> Male
+            </label>
+            <label for="radio">
+              <input type="radio" name="gender" value="female"> Female
+            </label>
+            <label for="radio">
+              <input type="radio" name="gender" value="other" checked> Other
+            </label>
+          </div>
+        <button type="submit" onclick="signup()">Sign up</button>
+    </div>
+{% endblock %}

@@ -22,12 +22,13 @@ class User(AbstractBaseUser):
     SEX_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
+        ('O', 'Other'),
     )
     
     username = models.CharField(max_length=255, unique=True)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=255)
-    sex = models.CharField(max_length=1, choices=SEX_CHOICES)
+    sex = models.CharField(max_length=1, choices=SEX_CHOICES, default='O')
     dob = models.DateField(null=True)
     dor = models.DateTimeField(auto_now_add=True)
     lld = models.DateTimeField(auto_now=True)

@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .models import User
 
 def user_login(request):
@@ -13,7 +14,7 @@ def signup(request):
         password = request.POST['password']
         password_repeat = request.POST['password_repeat']
         dob = request.POST['dob']
-        gender = request.POST['gender']
+        sex = request.POST.get('sex')  # Змінена отримання значення поля
         
         # Перевірка, чи паролі співпадають
         if password != password_repeat:
@@ -25,10 +26,10 @@ def signup(request):
         
         # Збереження додаткових даних користувача
         user.dob = dob
-        user.gender = gender
+        user.sex = sex  # Змінена змінна поля
         user.save()
         
         # Перенаправлення користувача на сторінку після успішної реєстрації
-        return redirect('main')
+        return redirect(reverse('login'))
     
     return render(request, 'users/signup.html')

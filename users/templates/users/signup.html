@@ -1,24 +1,37 @@
 {% extends 'users/base.html' %}
 
+{% if request.method == 'POST' %}
+    <p>Form Data:</p>
+    <p>Username: {{ request.POST.username }}</p>
+    <p>Email: {{ request.POST.email }}</p>
+    <p>Password: {{ request.POST.password }}</p>
+    <p>Password Repeat: {{ request.POST.password_repeat }}</p>
+    <p>Date of Birth: {{ request.POST.dob }}</p>
+    <p>Gender: {{ request.POST.gender }}</p>
+{% endif %}
+
 {% block content %}
     <div class="signup">
-        <input type="text" placeholder="User name">
-        <input type="text" placeholder="Email(login)">
-        <input type="password" placeholder="Create password">
-        <input type="password" placeholder="Repeat password">
-        <input type="date" placeholder="Date of birth">
-        <div class="radio-container">
-            <label for="">sex:</label>
-            <label for="radio">
-              <input type="radio" name="gender" value="male"> Male
-            </label>
-            <label for="radio">
-              <input type="radio" name="gender" value="female"> Female
-            </label>
-            <label for="radio">
-              <input type="radio" name="gender" value="other" checked> Other
-            </label>
-          </div>
-        <button type="submit" onclick="signup()">Sign up</button>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="User name" name="username">
+            <input type="text" placeholder="Email" name="email">
+            <input type="password" placeholder="Create password" name="password">
+            <input type="password" placeholder="Repeat password" name="password_repeat">
+            <input type="date" placeholder="Date of birth" name="dob" pattern="\d{4}-\d{2}-\d{2}">
+            <div class="radio-container">
+                <label for="">Sex:</label>
+                <label for="male">
+                    <input type="radio" id="male" name="gender" value="male"> Male
+                </label>
+                <label for="female">
+                    <input type="radio" id="female" name="gender" value="female"> Female
+                </label>
+                <label for="other">
+                    <input type="radio" id="other" name="gender" value="other" checked> Other
+                </label>
+            </div>
+            <button type="submit">Sign up</button>
+        </form>
     </div>
 {% endblock %}

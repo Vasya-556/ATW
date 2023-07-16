@@ -133,3 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # for correct operation of image uploading
 MEDIA_ROOT = 'media'
 MEDIA_URL = '/media/'
+
+# authentication
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]

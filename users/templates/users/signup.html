@@ -1,36 +1,10 @@
 {% extends 'users/base.html' %}
 
-{% if request.method == 'POST' %}
-    <p>Form Data:</p>
-    <p>Username: {{ request.POST.username }}</p>
-    <p>Email: {{ request.POST.email }}</p>
-    <p>Password: {{ request.POST.password }}</p>
-    <p>Password Repeat: {{ request.POST.password_repeat }}</p>
-    <p>Date of Birth: {{ request.POST.dob }}</p>
-    <p>Gender: {{ request.POST.gender }}</p>
-{% endif %}
-
 {% block content %}
     <div class="signup">
         <form method="post">
             {% csrf_token %}
-            <input type="text" placeholder="User name" name="username">
-            <input type="text" placeholder="Email" name="email">
-            <input type="password" placeholder="Create password" name="password">
-            <input type="password" placeholder="Repeat password" name="password_repeat">
-            <input type="date" placeholder="Date of birth" name="dob" pattern="\d{4}-\d{2}-\d{2}">
-            <div class="radio-container">
-                <label for="">Sex:</label>
-                <label for="Male">
-                    <input type="radio" id="Male" name="sex" value="M"> Male
-                </label>
-                <label for="Female">
-                    <input type="radio" id="Female" name="sex" value="F"> Female
-                </label>
-                <label for="Other">
-                    <input type="radio" id="Other" name="sex" value="O" checked> Other
-                </label>
-            </div>
+            {{ form.as_p }}
             <button type="submit">Sign up</button>
         </form>
     </div>

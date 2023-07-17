@@ -4,9 +4,11 @@
     <div class="login">
         <form method="post">
             {% csrf_token %}
-            <input type="text" placeholder="login" name="username">
-            <input type="password" placeholder="password" name="password">
-            <button type="submit">Enter</button>
+            {{ form.as_p }}
+            <button type="submit">Log in</button>
         </form>
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
     </div>
 {% endblock %}

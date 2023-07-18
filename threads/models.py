@@ -11,3 +11,7 @@ class Comment(models.Model):
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField('Comment_text')
     created_at = models.DateTimeField('Created_at', auto_now_add=True)
+    parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+
+    def __str__(self):
+        return self.text

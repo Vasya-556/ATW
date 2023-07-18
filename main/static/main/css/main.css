@@ -41,3 +41,19 @@
     text-indent: 20px;
     margin: 10px;
 }
+
+.thread {
+    word-wrap: break-word;
+    margin-left: 20vh;
+    margin-right: 20vh;
+    margin-top: 2%;
+}
+
+.thread h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.comment p{
+    background-color: aliceblue;
+}

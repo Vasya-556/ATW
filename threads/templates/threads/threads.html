@@ -13,6 +13,7 @@
                     <li>{{ comment.text }}</li>
                 {% endfor %}
             </ul>
+            <a href="{% url 'threads' el.id %}">Перейти до потоку</a>
         </div>
     {% endfor%}
 

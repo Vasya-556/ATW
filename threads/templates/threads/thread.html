@@ -1,0 +1,22 @@
+{% extends 'main/layout.html' %}
+
+{% block title%}{{thread.title}}{% endblock %}
+
+{% block content%}
+
+    <div class="thread">
+        <h1>{{thread.title}}</h1>
+        <p>{{thread.full_text}}</p>
+        <div class="comment">
+            <ul>
+                {% for comment in thread.comments.all %}
+                    {% if comment.parent_comment %}
+                        <p >Адресат: {{ comment.parent_comment }}</p>
+                    {% endif %}
+                    <li>{{ comment.text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock%}

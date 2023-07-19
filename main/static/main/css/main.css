@@ -30,6 +30,7 @@
     margin-top: 2%;
     width: 1050px;
     border: 5px solid #602424;
+    padding: 10px;
 }
 
 .threads h3 {
@@ -39,7 +40,6 @@
 
 .threads p {
     text-indent: 20px;
-    margin: 10px;
 }
 
 .thread {
@@ -54,6 +54,24 @@
     justify-content: center;
 }
 
-.comment p{
+.comment {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 2px solid salmon;
+}
+
+.comment #reply{
     background-color: aliceblue;
+    margin-left: 20px; 
+    font-style: italic;
+}
+
+.comment #Nocomments {
+    display: flex;
+    justify-content: center;   
+}
+
+.newThread {
+    margin-top: 10vh;
+    margin-left: 30vh;
 }

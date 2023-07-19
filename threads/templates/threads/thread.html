@@ -8,14 +8,16 @@
         <h1>{{thread.title}}</h1>
         <p>{{thread.full_text}}</p>
         <div class="comment">
-            <ul>
-                {% for comment in thread.comments.all %}
-                    {% if comment.parent_comment %}
-                        <p >Адресат: {{ comment.parent_comment }}</p>
-                    {% endif %}
-                    <li>{{ comment.text }}</li>
-                {% endfor %}
-            </ul>
+            {% if thread.comments.exists %}
+            {% for comment in thread.comments.all %}
+                {% if comment.parent_comment %}
+                    <p id="reply">{{ comment.parent_comment }}</p>
+                {% endif %}
+                {{ comment.text }}<br>
+            {% endfor %}
+        {% else %}
+            <p id="Nocomments">No comments</p>
+        {% endif %}
         </div>
     </div>
 

@@ -8,3 +8,6 @@ def AllThreads(request):
 def Thread_(request, thId):
     thread = get_object_or_404(Thread, id=thId)
     return render(request, 'threads/thread.html', {'thread': thread})
+
+def NewThread(request):
+    return render(request, 'threads/NewThread.html')

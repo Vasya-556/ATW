@@ -14,8 +14,8 @@
         {% if forloop.counter <= 3 %}
             <div class="threads">
                 <h3>{{ el.title }}</h3>
-                <p>{{ el.full_text }}</p>
-                <a href="{% url 'threads' thId=el.id %}">Перейти до thread</a>
+                <p>{{ el.full_text|truncatechars:500 }}</p>
+                <a class="btn btn-primary btn-sm" href="{% url 'threads' thId=el.id %}">Перейти до thread</a>
             </div>
         {% endif %}
     {% endfor %}

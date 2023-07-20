@@ -75,3 +75,11 @@
     margin-top: 10vh;
     margin-left: 30vh;
 }
+
+.comment #commentForm {
+    display: none;
+}
+
+.thread #EditForm{
+    display: none;
+}

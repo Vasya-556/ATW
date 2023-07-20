@@ -6,18 +6,30 @@
 
     <div class="thread">
         <h1>{{thread.title}}</h1>
+        <button id="Edit" onclick="EditThread()">Edit</button>
         <p>{{thread.full_text}}</p>
+        <div id="EditForm">
+            <input type="text">{{thread.title}}
+            <textarea name="" id="" cols="165" rows="15">{{thread.full_text}}</textarea>
+            <button>Apply</button>
+        </div>
         <div class="comment">
+            <button id="addCommentButton" onclick="showComment()">Add comment</button><br>
             {% if thread.comments.exists %}
-            {% for comment in thread.comments.all %}
-                {% if comment.parent_comment %}
-                    <p id="reply">{{ comment.parent_comment }}</p>
-                {% endif %}
-                {{ comment.text }}<br>
-            {% endfor %}
-        {% else %}
-            <p id="Nocomments">No comments</p>
-        {% endif %}
+                {% for comment in thread.comments.all %}
+                    {% if comment.parent_comment %}
+                        <p id="reply">{{ comment.parent_comment }}</p>
+                    {% endif %}
+                    {{ comment.text }}<br>
+                    <button class="replyButton" onclick="showComment()">Reply</button><br>
+                {% endfor %}
+            {% else %}
+                <p id="Nocomments">No comments</p>
+            {% endif %}
+            <div class="commentForm" id="commentForm">
+                <textarea id="commentText" cols="162" rows="5"></textarea><br>
+                <button id="postCommentButton">Post Comment</button><br>
+            </div>
         </div>
     </div>
 

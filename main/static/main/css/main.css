@@ -76,10 +76,6 @@
     margin-left: 30vh;
 }
 
-.comment #commentForm {
-    display: none;
-}
-
-.thread #EditForm{
-    display: none;
+.comment #author{
+    font-style: italic;
 }

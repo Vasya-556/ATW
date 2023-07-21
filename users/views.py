@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, FormView
-from .models import User
+from .models import *
 
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'  # Шлях до шаблону входу

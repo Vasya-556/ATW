@@ -31,7 +31,7 @@ class User(AbstractBaseUser):
     dob = models.DateField(null=True)
     dor = models.DateTimeField(auto_now_add=True)
     lld = models.DateTimeField(auto_now=True)
-    avatar = models.ImageField(upload_to='avatars/')
+    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d/')
     ad = models.TextField(blank=True)
     
     is_active = models.BooleanField(default=True)

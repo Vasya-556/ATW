@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Thread
+from .models import *
 
 def AllThreads(request):
     threads = Thread.objects.all()

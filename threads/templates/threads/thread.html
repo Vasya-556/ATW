@@ -7,7 +7,7 @@
     <div class="thread">
         <h1>{{thread.title}} by {{thread.user}}</h1>
         <button id="Edit" onclick="EditThread()">Edit</button>
-        <p>{{thread.full_text}}</p>
+        <p>{{thread.full_text|linebreaks}}</p>
         <div id="EditForm" style="display: none;">
             <input type="text" placeholder="{{thread.title}}">
             <textarea name="" id="" cols="165" rows="15">{{thread.full_text}}</textarea>

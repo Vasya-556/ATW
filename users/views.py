@@ -10,7 +10,7 @@ from .models import *
 
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'  # Шлях до шаблону входу
-    # success_url = '/'  # URL для перенаправлення після успішного входу
+    success_url = 'main'  # URL для перенаправлення після успішного входу
     form_class = AuthenticationForm
 
     def form_valid(self, form):

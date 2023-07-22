@@ -7,9 +7,9 @@
     {% for el in threads%}
         <div class="threads">
             <h3>{{el.title}}</h3>
-            <p>{{ el.full_text|truncatechars:500 }}</p>
+            <p>{{ el.full_text|truncatewords:50 }}</p>
             <div style="text-align: right;">
-                <a class="btn btn-primary btn-sm" href="{% url 'threads' thId=el.id %}">Перейти до thread</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'thread' thId=el.id %}">Перейти до thread</a>
             </div>
         </div>
     {% endfor%}

@@ -10,7 +10,7 @@ from .models import *
 
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'  # Шлях до шаблону входу
-    success_url = 'main'  # URL для перенаправлення після успішного входу
+    # success_url = 'main/main.html'  # URL для перенаправлення після успішного входу
     form_class = AuthenticationForm
 
     def form_valid(self, form):
@@ -77,3 +77,7 @@ class RegisterUser(CreateView):
     form_class = UserCreationForm
     template_name = 'users/signup.html'
     success_url = reverse_lazy('login')
+
+
+def user_view(request):
+    return render(request, 'users/user.html')

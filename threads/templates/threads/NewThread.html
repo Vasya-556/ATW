@@ -4,8 +4,20 @@
 
 {% block content%}
     <div class="newThread">
-        <input type="text" id="title" placeholder="Enter title of you're thread"><br>
+        <!-- <input type="text" id="title" placeholder="Enter title of you're thread"><br>
         <textarea name="" id="" cols="150" rows="15"></textarea><br>
-        <button>Post this</button>
+        <button>Post this</button> -->
+        <form action="{% url 'newThread' %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-error">{{ form.non_field_errors }}</div>
+
+            {% for f in form %}
+                <p><label for="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor %}
+
+            <button type="submit">Post this</button>
+        </form>
     </div>
 {% endblock%}

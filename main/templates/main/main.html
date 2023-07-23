@@ -6,18 +6,17 @@
 
 <div class="topbar">
     <h1>Welcome to our forum<i class="fas fa-globe-americas"></i> <i class="fas fa-search"></i></h1>
-    
 </div>
-
 
     {% for el in threads %}
         {% if forloop.counter <= 3 %}
             <div class="threads">
                 <h3>{{ el.title }}</h3>
                 <p>{{ el.full_text|truncatewords:50 }}</p>
-                <a class="btn btn-primary btn-sm" href="{% url 'thread' thId=el.id %}">Перейти до thread</a>
+                <a class="btn btn-primary btn-sm" href="{% url 'thread' thId=el.id %}">More</a>
             </div>
         {% endif %}
     {% endfor %}
+    <a href="{%url 'threads' %}">more threads</a>
 
 {% endblock %}

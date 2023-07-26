@@ -27,10 +27,13 @@
             {% else %}
                 <p id="Nocomments">No comments</p>
             {% endif %}
-            <div id="commentForm" style="display: none;">
-                <textarea id="commentText" cols="162" rows="5"></textarea><br>
-                <button id="postCommentButton">Post Comment</button><br>
-            </div>
+            <form action="{% url 'thread' thId=thread.id %}" method="post">
+                {% csrf_token %}
+                <div id="commentForm" style="display: none;">
+                    <textarea id="commentText" cols="162" rows="5"></textarea><br>
+                    <button type="submit" id="postCommentButton">Post Comment</button><br>
+                </div>
+            </form>
         </div>
     </div>
 

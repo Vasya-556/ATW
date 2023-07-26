@@ -1,6 +1,5 @@
 from django import forms
 from .models import *
-
 # class AddNewThread(forms.Form):
 #     title = forms.CharField(max_length=250)
 #     full_text = forms.CharField(widget=forms.Textarea(attrs={'cols': 150, 'rows': 15}))

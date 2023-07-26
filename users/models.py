@@ -18,7 +18,7 @@ class UserManager(BaseUserManager):
         
         return self.create_user(email, password, **extra_fields)
 
-class User(AbstractBaseUser):
+class CustomUser(AbstractBaseUser):
     SEX_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),

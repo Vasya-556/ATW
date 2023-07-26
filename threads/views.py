@@ -3,12 +3,11 @@ from django.urls import reverse_lazy
 from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
-
-# def AllThreads(request):
-#     threads = Thread.objects.all()
-#     return render(request, 'threads/threads.html', {'threads': threads})
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 class Threads(ListView):
+    paginate_by = 2
     model = Thread
     template_name = 'threads/threads.html'
     context_object_name = 'threads'
@@ -19,10 +18,11 @@ class SingleThread(DetailView):
     context_object_name = 'thread'
     pk_url_kwarg = 'thId'
 
-class NewThread(CreateView):
+class NewThread(LoginRequiredMixin, CreateView):
     form_class = AddNewThread
     template_name = 'threads/NewThread.html'
     success_url = reverse_lazy('threads')
+    login_url = reverse_lazy('login')
 
 
 # def Thread_(request, thId):

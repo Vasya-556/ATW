@@ -7,6 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, FormView
 from .models import *
 from .forms import *
+from django.contrib.auth.models import User
 
 class LoginUser(LoginView):
     form_class = LoginForm
@@ -26,8 +27,17 @@ class RegisterUser(CreateView):
         return redirect('home')
 
 
-def user_view(request):
-    return render(request, 'users/user.html')
+def profile(request):
+    user = CustomUser.objects.get(pk=request.user.pk)
+    return render(request, 'users/profile.html', {'user': user})
+
+def edit_profile(request):
+    user = CustomUser.objects.get(pk=request.user.pk)
+    return render(request, 'users/edit_profile.html', {'user': user})
+
+def delete_profile(request):
+    user = CustomUser.objects.get(pk=request.user.pk)
+    return render(request, 'users/delete_profile.html', {'user': user})
 
 def logout_user(request):
     logout(request)

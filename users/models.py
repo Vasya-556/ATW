@@ -1,7 +1,7 @@
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-class UserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError("The Email field must be set")
@@ -18,35 +18,19 @@ class UserManager(BaseUserManager):
         
         return self.create_user(email, password, **extra_fields)
 
-class CustomUser(AbstractBaseUser):
-    SEX_CHOICES = (
+class CustomUser(AbstractUser):
+    GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
         ('O', 'Other'),
     )
-    
-    username = models.CharField(max_length=255, unique=True)
-    email = models.EmailField(unique=True)
-    sex = models.CharField(max_length=1, choices=SEX_CHOICES, default='O')
-    dob = models.DateField(null=True)
-    dor = models.DateTimeField(auto_now_add=True)
-    lld = models.DateTimeField(auto_now=True)
-    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d/')
-    ad = models.TextField(blank=True)
-    
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
-    
-    objects = UserManager()
-    
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    date_of_birth = models.DateField(null=True, blank=True)
+    registration_date = models.DateField(auto_now_add=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    additional_info = models.TextField(blank=True)
+
     def __str__(self):
         return self.username
-
-    #DOB - Date of birth
-    #DOR - Date of registration
-    #LLD - Last Login Date
-    #AD - Additional Data
+    
+    objects = CustomUserManager()

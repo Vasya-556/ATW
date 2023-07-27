@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+
+{% block title%}
+{{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+<div class="delete_profile">
+    <h1>Are you sure, you want delete your account?</h1>
+    <h3>you can't restore you're data</h3>
+    <a href="{% url 'main' %}">Yes</a>
+    <a href="{% url 'edit_profile'%}">No</a>
+</div>
+
+{% endblock %}

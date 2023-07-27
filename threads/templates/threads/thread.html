@@ -5,14 +5,11 @@
 {% block content%}
 
     <div class="thread">
-        <h1>{{thread.title}} by {{thread.user}}</h1>
-        <button id="Edit" onclick="EditThread()">Edit</button>
+        <h1>{{thread.title}} by {{thread.author}}</h1>
+        {% if user.is_authenticated and user == thread.author %}
+            <a href="{% url 'edit_thread' thId=thread.pk %}">Edit Thread</a>
+        {% endif %}
         <p>{{thread.full_text|linebreaks}}</p>
-        <div id="EditForm" style="display: none;">
-            <input type="text" placeholder="{{thread.title}}">
-            <textarea name="" id="" cols="165" rows="15">{{thread.full_text}}</textarea>
-            <button>Apply</button>
-        </div>
         <div class="comment">
             <button id="addCommentButton" onclick="showComment()">Add comment</button><br>
             {% if thread.comments.exists %}
@@ -20,7 +17,7 @@
                     {% if comment.parent_comment %}
                         <p id="reply">{{ comment.parent_comment }}</p>
                     {% endif %}
-                    <p id="author">{{ comment.user }}:</p>
+                    <p id="author">{{ comment.author }}:</p>
                     <p>{{ comment.text }}</p>
                     <button class="replyButton" onclick="showComment()">Reply</button><br>
                 {% endfor %}

@@ -91,6 +91,6 @@
     transform: translate(-50%, -50%);
 }
 
-.editThread {
+.editThread, .delete_thread {
     margin-left: 10vh;
 }

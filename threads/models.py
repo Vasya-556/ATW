@@ -5,7 +5,6 @@ from django.urls import reverse
 
 class Thread(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='threads')
     title = models.CharField('Title', max_length=250)
     time_create = models.DateTimeField('Time of publication',auto_now_add=True)
     time_update = models.DateTimeField('Time of update',auto_now=True)
@@ -23,7 +22,6 @@ class Comment(models.Model):
     text = models.TextField('Comment_text')
     time_create = models.DateTimeField('Created_at', auto_now_add=True)
     parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True, related_name='comments')
 
     def __str__(self):
         return self.text

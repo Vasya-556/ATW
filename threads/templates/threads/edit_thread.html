@@ -5,6 +5,7 @@
 {% block content %}
     <div class="editThread">
         <h1>Edit Thread</h1>
+        <a href="{% url 'delete_thread' thId=thread.pk %}">delete thread</a>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

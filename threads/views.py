@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from .models import *
 from .forms import *
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 
@@ -46,3 +46,8 @@ class EditThreadView(UpdateView):
             return redirect('main')
 
         return super().dispatch(request, *args, **kwargs)
+    
+class DeleteThread(DeleteView):
+    model = Thread
+    template_name = 'threads/delete_thread.html'
+    success_url = reverse_lazy('threads')

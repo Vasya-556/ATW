@@ -1,0 +1,17 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Edit Thread{% endblock %}
+
+{% block content %}
+
+<div class="delete_thread">
+    <h1>delete Thread</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Delete</button>
+        <a href="{% url 'edit_thread' thId=thread.pk %}">NO</a>
+    </form>
+</div>
+
+{% endblock %}

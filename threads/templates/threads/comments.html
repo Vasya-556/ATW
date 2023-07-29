@@ -1,19 +1,19 @@
+<button onclick="ShowComment()">add comment</button>
+<form method="post" style="display: none;" id="addComment">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Comment</button>
+</form>
 {% if thread.comments.exists %}
     {% for comment in thread.comments.all %}
         {% if comment.parent_comment %}
-            <p id="reply">{{ comment.parent_comment }}</p>
+            <p id="reply">{{ comment.parent_comment.text }}</p>
         {% endif %}
+        <p id="time_create">{{ comment.time_create }}</p>
         <p id="author">{{ comment.author }}:</p>
         <p>{{ comment.text }}</p>
-        <button class="replyButton" onclick="showComment()">Reply</button><br>
+        <button class="replyButton" onclick="ShowCommentReply('{{ comment.pk }}')">Reply</button><br>
     {% endfor %}
 {% else %}
     <p id="Nocomments">No comments</p>
 {% endif %}
-<form action="{% url 'thread' thId=thread.id %}" method="post">
-    {% csrf_token %}
-    <div id="commentForm" style="display: none;">
-        <textarea id="commentText" cols="162" rows="5"></textarea><br>
-        <button type="submit" id="postCommentButton">Post Comment</button><br>
-    </div>
-</form>

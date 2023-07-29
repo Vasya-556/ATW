@@ -4,7 +4,7 @@ from django.forms.models import BaseModelForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, UpdateView
 from .models import *
 from .forms import *
 from django.contrib.auth.models import User
@@ -42,3 +42,15 @@ def delete_profile(request):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+class EditProfileView(UpdateView):
+    model = CustomUser
+    template_name = 'users/edit_profile.html'
+    form_class = EditProfileForm
+    
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+    def get_success_url(self):
+        return reverse_lazy('profile')

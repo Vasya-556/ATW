@@ -16,22 +16,21 @@ function sidebar_button(){
     }
 }
 
-function showComment(){
-    comForm = document.getElementById('commentForm');
-    if (comForm.style.display === "none"){
-        comForm.style.display = "block";
+function ShowComment(){
+    id = document.getElementById('addComment');
+    if (id.style.display === "none"){
+        id.style.display = "block";
     }
     else{
-        comForm.style.display = "none";
+        id.style.display = "none";
     }
 }
 
-function EditThread(){
-    editForm = document.getElementById('EditForm');
-    if (editForm.style.display === "none"){
-        editForm.style.display = "block";
+function ShowCommentReply(parentId) {
+    id = document.getElementById('addComment');
+    if (id.style.display === "none") {
+        id.style.display = "block";
     }
-    else{
-        editForm.style.display = "none";
-    }
+    document.getElementById('id_parent_comment').value = parentId;
 }
+

@@ -24,7 +24,7 @@ class Comment(models.Model):
     parent_comment = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
 
     def __str__(self):
-        return self.text
+        return str(self.pk)
     
     class Meta:
-        ordering = ['time_create']
+        ordering = ['-time_create']

@@ -11,6 +11,15 @@
     <a href="{% url 'edit_profile' %}">Edit</a>
     <h1>name: {{ user.username }}</h1>
     <p>about: {{ user.additional_info }}</p>
+    
+    {% if user.gender == 'F' %}
+        <p>Sex: Female</p>
+    {% elif user.gender == 'M'%}
+        <p>Sex: Male</p>
+    {% else %}
+        <p>Sex: Other</p>
+    {% endif%}
+
     {% if user.avatar %}
         <img src="{{ user.avatar.url }}" alt="{{ user.username }}'s Avatar">
     {% else %}
@@ -27,8 +36,6 @@
     <ul>
         <li></li>
     </ul>
-    
-
 
 </div>
 

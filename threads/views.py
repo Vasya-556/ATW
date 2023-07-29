@@ -5,6 +5,7 @@ from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 class Threads(ListView):
     paginate_by = 5
@@ -12,12 +13,35 @@ class Threads(ListView):
     template_name = 'threads/threads.html'
     context_object_name = 'threads'
 
+    def get_queryset(self):
+        order_by = self.request.GET.get('order_by', '-time_create')
+        return Thread.objects.order_by(order_by)
+
 class SingleThread(DetailView):
     model = Thread
     template_name = 'threads/thread.html'
     context_object_name = 'thread'
     pk_url_kwarg = 'thId'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = AddNewComment()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = AddNewComment(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.thread = self.object
+            comment.author = request.user
+            comment.save()
+            return redirect('thread', thId=self.object.pk)
+        else:
+            context = self.get_context_data(**kwargs)
+            context['form'] = form
+            return self.render_to_response(context)
+        
 class NewThread(LoginRequiredMixin, CreateView):
     form_class = AddNewThread
     template_name = 'threads/NewThread.html'
@@ -51,3 +75,4 @@ class DeleteThread(DeleteView):
     model = Thread
     template_name = 'threads/delete_thread.html'
     success_url = reverse_lazy('threads')
+    pk_url_kwarg = 'thId'

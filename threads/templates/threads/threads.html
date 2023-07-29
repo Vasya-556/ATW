@@ -5,10 +5,23 @@
 {% block content%}
 <a href="{% url 'main' %}">on mainmainmain</a>
 
+    <form method="get" action="">
+        <label for="order_by">Sort by:</label>
+        <select name="order_by" id="order_by">
+            <option value="-time_create" {% if request.GET.order_by == '-time_create' %}selected{% endif %}>Time created (Newest First)</option>
+            <option value="time_create" {% if request.GET.order_by == 'time_create' %}selected{% endif %}>Time created (Oldest First)</option>
+            <option value="title" {% if request.GET.order_by == 'title' %}selected{% endif %}>Title (A-Z)</option>
+            <option value="-title" {% if request.GET.order_by == '-title' %}selected{% endif %}>Title (Z-A)</option>
+        </select>
+        <label for="search">Search:</label>
+        <input type="text" name="search" value="{{ request.GET.search }}">
+        <button type="submit">Apply</button>
+    </form>
+
     {% for el in threads%}
         <div class="threads">
             <h3>{{el.title}} by {{el.author}}</h3>
-            <p>{{ el.full_text|truncatechars:500 }}</p>
+            <p>{{ el.full_text|truncatechars:500|linebreaks|truncatewords:50 }}</p>
             <div style="text-align: right;">
                 <a class="btn btn-primary btn-sm" href="{% url 'thread' thId=el.id %}">more</a>
             </div>

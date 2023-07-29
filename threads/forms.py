@@ -18,3 +18,12 @@ class EditThreadForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-input'}),
             'full_text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
         }
+
+class AddNewComment(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text', 'parent_comment']
+        widgets = {
+            'text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
+            'parent_comment': forms.HiddenInput(),
+        }

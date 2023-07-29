@@ -7,15 +7,20 @@
 {% block content %}
 
 <div class="edit_profile">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
     <a href="{% url 'profile' %}">back</a><br>
     <a href="{% url 'delete_profile' %}">delete_profile</a><br>
-    <input type="text" name="" id="">{{user.username}} <br>
+    <!-- <input type="text" name="" id="">{{user.username}} <br>
     <img src="{{user.avatar.url}}" alt=""> <br>
     <input type="date" name="" id="">{{user.date_of_birth}} <br>
     <input type="radio">{{user.gender}} <br>
     <input type="email">{{user.email}} <br>
     <textarea name="" id="" cols="30" rows="10">{{ user.additional_info}}</textarea><br>
-    <button>apply</button>
+    <button>apply</button> -->
 </div>
 
 {% endblock %}

@@ -4,6 +4,8 @@
     {{ form.as_p }}
     <button type="submit">Comment</button>
 </form>
+
+
 {% if thread.comments.exists %}
     {% for comment in thread.comments.all %}
         {% if comment.parent_comment %}

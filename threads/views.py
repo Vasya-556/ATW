@@ -5,7 +5,7 @@ from .forms import *
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
-from django.http import JsonResponse
+from django.db.models import Q
 
 class Threads(ListView):
     paginate_by = 5
@@ -15,6 +15,11 @@ class Threads(ListView):
 
     def get_queryset(self):
         order_by = self.request.GET.get('order_by', '-time_create')
+        search_text = self.request.GET.get('search_text', '')
+
+        if search_text:
+            return Thread.objects.filter(Q(title__icontains=search_text) | Q(full_text__icontains=search_text) | Q(author__username__icontains=search_text)).order_by(order_by)
+
         return Thread.objects.order_by(order_by)
 
 class SingleThread(DetailView):

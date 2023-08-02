@@ -33,4 +33,3 @@ function ShowCommentReply(parentId) {
     }
     document.getElementById('id_parent_comment').value = parentId;
 }
-

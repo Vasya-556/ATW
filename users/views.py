@@ -24,7 +24,7 @@ class RegisterUser(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('main')
 
 
 def profile(request):
@@ -34,10 +34,6 @@ def profile(request):
 def edit_profile(request):
     user = CustomUser.objects.get(pk=request.user.pk)
     return render(request, 'users/edit_profile.html', {'user': user})
-
-def delete_profile(request):
-    user = CustomUser.objects.get(pk=request.user.pk)
-    return render(request, 'users/delete_profile.html', {'user': user})
 
 def logout_user(request):
     logout(request)

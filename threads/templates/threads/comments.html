@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <button onclick="ShowComment()">add comment</button>
 <form method="post" style="display: none;" id="addComment">
     {% csrf_token %}
@@ -14,8 +15,25 @@
         <p id="time_create">{{ comment.time_create }}</p>
         <p id="author">{{ comment.author }}:</p>
         <p>{{ comment.text }}</p>
-        <button class="replyButton" onclick="ShowCommentReply('{{ comment.pk }}')">Reply</button><br>
+        <button class="replyButton" onclick="ShowCommentReply('{{ comment.pk }}')">Reply</button>
+        {% if user.is_authenticated %}
+            <form method="post" action="{% url 'like_comment' thId=thread.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="like_type" value="like">
+                <input type="hidden" name="comment_id" value="{{ comment.pk }}">
+                <button type="submit">Like</button>
+            </form>
+            <form method="post" action="{% url 'like_comment' thId=thread.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="like_type" value="dislike">
+                <input type="hidden" name="comment_id" value="{{ comment.pk }}">
+                <button type="submit">Dislike</button>
+            </form>
+        {% endif %}
+        <p>Likes: {{ comment_likes|get_item:comment.pk }}</p>
+        <p>Dislikes: {{ comment_dislikes|get_item:comment.pk }}</p>
     {% endfor %}
 {% else %}
     <p id="Nocomments">No comments</p>
 {% endif %}
+

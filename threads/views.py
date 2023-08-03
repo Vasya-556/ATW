@@ -161,3 +161,40 @@ def like_comment(request, thId):
         rating.save()
 
     return redirect('thread', thId=thread.pk)
+
+class EditCommentView(LoginRequiredMixin, UpdateView):
+    model = Comment
+    template_name = 'threads/thread.html'  
+    form_class = EditCommentForm
+    context_object_name = 'comment'
+    pk_url_kwarg = 'commentId'
+
+    def get_success_url(self):
+        thId = self.kwargs['thId']
+        return reverse_lazy('thread', kwargs={'thId': thId})
+
+    def dispatch(self, request, *args, **kwargs):
+        comment = self.get_object()
+
+        if not request.user.is_authenticated or request.user != comment.author:
+            return redirect('main')
+
+        return super().dispatch(request, *args, **kwargs)
+    
+class DeleteCommentView(LoginRequiredMixin, DeleteView):
+    model = Comment
+    template_name = 'threads/thread.html'  
+    context_object_name = 'comment'
+    pk_url_kwarg = 'commentId'
+
+    def get_success_url(self):
+        thId = self.kwargs['thId']
+        return reverse('thread', kwargs={'thId': thId})
+
+    def dispatch(self, request, *args, **kwargs):
+        comment = self.get_object()
+
+        if not request.user.is_authenticated or request.user != comment.author:
+            return redirect('main')
+
+        return super().dispatch(request, *args, **kwargs)

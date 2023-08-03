@@ -10,4 +10,6 @@ urlpatterns = [
     path('delete_thread/<int:thId>/', views.DeleteThread.as_view(), name='delete_thread'),
     path('like_thread/<int:thId>/', views.like_thread, name='like_thread'),
     path('like_comment/<int:thId>/', views.like_comment, name='like_comment'),
+    path('<int:thId>/edit_comment/<int:commentId>/', views.EditCommentView.as_view(), name='edit_comment'),
+    path('<int:thId>/delete_comment/<int:commentId>/', views.DeleteCommentView.as_view(), name='delete_comment'),
 ]

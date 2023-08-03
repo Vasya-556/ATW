@@ -31,5 +31,8 @@ function ShowCommentReply(parentId) {
     if (id.style.display === "none") {
         id.style.display = "block";
     }
+    else{
+        id.style.display = "none";
+    }
     document.getElementById('id_parent_comment').value = parentId;
 }

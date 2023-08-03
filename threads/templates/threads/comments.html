@@ -15,6 +15,18 @@
         <p id="time_create">{{ comment.time_create }}</p>
         <p id="author">{{ comment.author }}:</p>
         <p>{{ comment.text }}</p>
+        {% if user.is_authenticated and user == comment.author %}
+            <button onclick="ShowEditCommentForm()">Edit</button>
+            <form method="post" action="{% url 'edit_comment' thId=thread.pk commentId=comment.pk %}" style="display: none;" id="editComment">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save Changes</button>
+            </form>
+            <form method="post" action="{% url 'delete_comment' thId=thread.pk commentId=comment.pk %}">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        {% endif %}
         <button class="replyButton" onclick="ShowCommentReply('{{ comment.pk }}')">Reply</button>
         {% if user.is_authenticated %}
             <form method="post" action="{% url 'like_comment' thId=thread.pk %}">
@@ -37,3 +49,14 @@
     <p id="Nocomments">No comments</p>
 {% endif %}
 
+<script>
+function ShowEditCommentForm(){
+    id = document.getElementById('editComment');
+    if (id.style.display === "none"){
+        id.style.display = "block";
+    }
+    else{
+        id.style.display = "none";
+    }
+}
+</script>

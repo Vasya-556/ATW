@@ -27,3 +27,11 @@ class AddNewComment(forms.ModelForm):
             'text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
             'parent_comment': forms.HiddenInput(),
         }
+
+class EditCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
+        }

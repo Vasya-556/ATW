@@ -6,13 +6,18 @@
 
 {% block content %}
 
+<a href="{% url 'profile' %}">back</a><br>
 <div class="edit_profile">
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Changes</button>
+        <div class="form-error">{{ form.non_field_errors }}</div>
+
+            {% for f in form %}
+                <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor%}
+        <button type="submit" class="btn btn-dark" id="btn">Save Changes</button>
     </form>
-    <a href="{% url 'profile' %}">back</a><br>
 </div>
 
 {% endblock %}

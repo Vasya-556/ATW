@@ -5,11 +5,18 @@
 {% block content %}
     <div class="editThread">
         <h1>Edit Thread</h1>
-        <a href="{% url 'delete_thread' thId=thread.pk %}">delete thread</a>
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save Changes</button>
+            
+            <div class="form-error">{{ form.non_field_errors }}</div>
+
+            {% for f in form %}
+                <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+                <div class="form-error">{{ f.errors }}</div>
+            {% endfor%}
+            <a href="{% url 'delete_thread' thId=thread.pk %}">Delete thread <i class="fas fa-trash"></i></a>
+
+            <button type="submit" class="btn btn-dark" id="btn">Save Changes</button>
         </form>
     </div>
 {% endblock %}

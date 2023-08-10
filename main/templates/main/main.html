@@ -1,22 +1,26 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 
 {% block title %}Around the world{% endblock %}
 
 {% block content %}
 
 <div class="topbar">
-    <h1>Welcome to our forum<i class="fas fa-globe-americas"></i> <i class="fas fa-search"></i></h1>
+    <h1>Welcome to our forum <img src="{% static 'main/img/logo11.svg' %}" alt="" width="35" height="35"></h1>
 </div>
 
     {% for el in threads %}
         {% if forloop.counter <= 3 %}
             <div class="threads">
-                <h3>{{ el.title }}</h3>
+                <h1>{{ el.title }}</h1>
                 <p>{{ el.full_text|truncatewords:50 }}</p>
-                <a class="btn btn-primary btn-sm" href="{% url 'thread' thId=el.id %}">More</a>
+                <div  style="text-align: right;">
+                    <a class="btn btn-dark btn-sm" href="{% url 'thread' thId=el.id %}" id="">More</a>
+                </div>
             </div>
         {% endif %}
     {% endfor %}
-    <a href="{%url 'threads' %}">more threads</a>
+    <br>
+    <a href="{%url 'threads' %}" class="btn btn-dark btn-bg" id="btn2">more threads</a>
 
 {% endblock %}

@@ -3,6 +3,21 @@
     top: 0%;
     left: 50%;
     transform: translate(-50%,0%);
+    padding-top: 10px;
+    margin: 0 30px 0 0;
+}
+
+.space-between-links {
+    margin-right: 30px; /* Збільшуємо відстань між посиланнями */
+    display: inline-block;
+}
+
+.body{
+    background-color: #4B789F;
+}
+
+.link-light {
+    text-decoration: none;
 }
 
 main {
@@ -12,7 +27,7 @@ main {
     transform: translate(-50%, -50%);
     height: 500px;
     width: 500px;
-    background-color: tan;
+    background-color: #0A0F35;
     display: flex;
     justify-content: center;
 }
@@ -27,43 +42,62 @@ main {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-.login{
-    background-color: red;
-}
-.signup{
-    background-color: aqua;
+    background-color: #94C4E8;
 }
 
 .radio-container {
     display: flex;
     flex-direction: column;
-  }
-
-/* 
-.registration {
-    position: absolute;
-    top: 10%;
-    left: 0%;
-    height: 90%;
-    width: 100%;
-    background-color: red;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
-.enter {
-    position: absolute;
-    top: 10%;
-    left: 0%;
-    height: 90%;
-    width: 100%;
-    background-color:aquamarine;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-} */
+.form-input {
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-label {
+    display: inline-block;
+    min-width: 150px;
+    vertical-align: top;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.form-error ul {
+    list-style: none;
+    padding: 0;
+    color: #CC0000;
+}
+
+#btn {
+    display: block;
+    margin: 0 auto;
+}
+
+.form-radio {
+    /* Стилі для радіо-кнопок */
+    margin-right: 5px;
+    cursor: pointer; /* Зміна курсора при наведенні на радіо-кнопку */
+}
+
+/* Заміна звичайного круглого вигляду радіо-кнопки на кастомний */
+.form-radio input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #051527; /* Синій колір рамки */
+    background-color: #fff; /* Фоновий колір кнопки */
+    outline: none;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Стилі для вибраної радіо-кнопки */
+.form-radio input[type="radio"]:checked {
+    background-color: #0A0F35; /* Зміна фонового кольору для вибраної кнопки */
+}
+

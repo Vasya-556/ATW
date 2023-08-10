@@ -5,11 +5,13 @@
 {% block content %}
 
 <div class="delete_thread">
-    <h1>delete Thread</h1>
+    <h1>Are you sure you want delete this thread?</h1>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Delete</button>
-        <a href="{% url 'edit_thread' thId=thread.pk %}">NO</a>
+        <div class="buttons-container">
+            <button type="submit" class="btn btn-danger btn-bg" id="btn3">Delete</button>
+            <a href="{% url 'edit_thread' thId=thread.pk %}" class="btn btn-success btn-bg" id="btn3">No</a>
+        </div>
     </form>
 </div>
 

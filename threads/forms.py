@@ -7,7 +7,7 @@ class AddNewThread(forms.ModelForm):
         fields = ['title','full_text']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
-            'full_text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
+            'full_text': forms.Textarea(attrs={'class': 'no-resize', 'cols': 100, 'rows': 15}),
         }
 
 class EditThreadForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class EditThreadForm(forms.ModelForm):
         fields = ['title','full_text']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input'}),
-            'full_text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
+            'full_text': forms.Textarea(attrs={'class': 'no-resize', 'cols': 100, 'rows': 15}),
         }
 
 class AddNewComment(forms.ModelForm):

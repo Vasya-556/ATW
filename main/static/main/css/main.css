@@ -4,11 +4,13 @@
     top: 0;
     width: 5.5vh;
     height: 100vh;
-    background-color: aqua;
+    background-color: #4d4d4d;
     padding: 8px;
+    padding-right: 8px;
     color: #4d4d4d;
     overflow: hidden;
     overflow-y: auto;
+    transition: width 0.3s ease-in-out;
 }
 
 .sidebar ul li {
@@ -17,8 +19,26 @@
 
 .sidebar button {
     transform: rotate(90deg);
+    transition: transform 0.3s ease-in-out;
 }
 
+.sidebar.expanded + main {
+    margin-left: 20vh; /* Змінити відступ зліва для основного вмісту */
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar.collapsed + main {
+    margin-left: 0;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.body {
+    background-color: #4B789F;
+}
+main {
+    transition: margin-left 0.3s ease-in-out;
+    font-weight: bold;
+}
 .topbar {
     padding-left: 80vh;
     padding-top: 20px;
@@ -29,11 +49,12 @@
     margin-left: 35vh;
     margin-top: 2%;
     width: 1050px;
-    border: 5px solid #602424;
+    border: 3px solid #BB1A2C;
     padding: 10px;
+    background-color: #94C4E8;
 }
 
-.threads h3 {
+.threads h1 {
     display: flex;
     justify-content: center;
 }
@@ -69,28 +90,187 @@
 .comment #Nocomments {
     display: flex;
     justify-content: center;   
-}
-
-.newThread {
-    margin-top: 10vh;
-    margin-left: 30vh;
-}
+} 
 
 .comment #author{
     font-style: italic;
 }
 
 .profile, .edit_profile{
-    margin-left: 10vh;
+    margin-left: 8vh;
+    margin-right: 3vh;
 }
-
+/* 
 .delete_profile {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
+} */
 
 .editThread, .delete_thread {
     margin-left: 10vh;
+}
+
+/* 
+#BB1A2C
+#DCB21B
+#578BDE
+#1044A9
+#0A0F35 
+#F2CBEA
+#94C4E8
+*/
+
+.text-end {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    background-color: #0A0F35;
+}
+
+.about {
+    background-color: #94C4E8;
+    padding: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.about p {
+    margin-bottom: 5px;
+}
+
+.avatar {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    width: 150px; /* Задаємо ширину зображення */
+    height: 150px; /* Задаємо висоту зображення */
+    left: 50%;
+    transform: translate(-50%,0%);
+    border: 2px solid #DCB21B; /* Додаємо рамку */
+    border-radius: 50%; /* Закруглюємо кути, щоб зробити круглу рамку */
+    object-fit: cover; /* Зберігаємо пропорції та обрізаємо зображення */
+}
+
+.link-light {
+    text-decoration: none;
+}
+
+.form-input {
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.no-resize{
+    font-size: 16px;
+    font-weight: bold;
+    resize: none;
+}
+
+.form-label {
+    display: inline-block;
+    min-width: 150px;
+    vertical-align: top;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.form-error ul {
+    list-style: none;
+    padding: 0;
+    color: #CC0000;
+}
+
+#btn {
+    display: block;
+    margin: 0 auto;
+}
+
+.edit_profile{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #94C4E8;
+    height: 600px;
+    width: 500px;
+}
+
+.form-radio {
+    /* Стилі для радіо-кнопок */
+    margin-right: 5px;
+    cursor: pointer; /* Зміна курсора при наведенні на радіо-кнопку */
+}
+
+/* Заміна звичайного круглого вигляду радіо-кнопки на кастомний */
+.form-radio input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #051527; /* Синій колір рамки */
+    background-color: #fff; /* Фоновий колір кнопки */
+    outline: none;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+/* Стилі для вибраної радіо-кнопки */
+.form-radio input[type="radio"]:checked {
+    background-color: #0A0F35; /* Зміна фонового кольору для вибраної кнопки */
+}
+
+#btn2{
+    display: block; /* Зробити кнопку блоковим елементом, щоб встановити ширину */
+    margin: 0 auto; /* Вирівняти кнопку по центру горизонтально */
+    text-align: center; /* Вирівняти текст усередині кнопки по центру */
+    width: fit-content;
+}
+
+.newThread {
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 490px;
+    width: 1100px;
+    background-color: #94C4E8;
+}
+
+.editThread{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+    height: 600px;
+    width: 1100px;
+    background-color: #94C4E8;
+}
+
+.delete_thread {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Вирівняти по центру вертикально */
+    justify-content: center; /* Вирівняти по центру горизонтально */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#btn3{
+    display: inline-block;
+    margin: 0 10px;
+    text-align: center; 
+    width: fit-content;
 }

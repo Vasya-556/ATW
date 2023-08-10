@@ -7,36 +7,37 @@
 {% block content %}
 
 <div class="profile">
-    <a href="{% url 'main' %}">On main</a><br>
-    <a href="{% url 'edit_profile' %}">Edit</a>
-    <h1>name: {{ user.username }}</h1>
-    <p>about: {{ user.additional_info }}</p>
     
-    {% if user.gender == 'F' %}
-        <p>Sex: Female</p>
-    {% elif user.gender == 'M'%}
-        <p>Sex: Male</p>
-    {% else %}
-        <p>Sex: Other</p>
-    {% endif%}
-
     {% if user.avatar %}
-        <img src="{{ user.avatar.url }}" alt="{{ user.username }}'s Avatar">
+        <img src="{{ user.avatar.url }}" class="avatar">
     {% else %}
-        <img src="{% static 'main/img/user.png' %}" alt="{{ user.username }}'s Avatar">
+        <img src="{% static 'main/img/user.png' %}" class="avatar">
     {% endif %}
-    <br>
-<!-- 
-    if threads:
-    <ul>
-        <li></li>
-    </ul>
 
-    if comment:
-    <ul>
-        <li></li>
-    </ul> -->
+    <div class="about">
+        <p>Name: {{ user.username }}</p>        
+        <p>Email: {{ user.email}}</p>
 
+        <p>Sex: 
+            {% if user.gender == 'F' %}
+                Female
+            {% elif user.gender == 'M'%}
+                Male    
+            {% else %}
+                Other
+            {% endif%}
+        </p>
+
+        <p>Registration date: {{user.registration_date}}</p>
+        <p>Date of birth: {{user.date_of_birth}}</p>
+
+        {% if user.additional_info != '' %}
+            <p>Additional info: <textarea name="" id="" cols="100" rows="10" readonly>{{ user.additional_info }}</textarea></p>
+        {% endif%}
+
+    <a href="{% url 'edit_profile' %}">Edit Profile <i class="fas fa-pencil-alt"></i></a>
+
+    </div>
 </div>
 
 {% endblock %}

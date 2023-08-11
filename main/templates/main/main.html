@@ -5,22 +5,24 @@
 
 {% block content %}
 
-<div class="topbar">
-    <h1>Welcome to our forum <img src="{% static 'main/img/logo11.svg' %}" alt="" width="35" height="35"></h1>
-</div>
+<div class="main-page">
+    <div class="topbar">
+        <h1>Welcome to our forum <img src="{% static 'main/img/logo11.svg' %}" alt="" width="35" height="35"></h1>
+    </div>
 
-    {% for el in threads %}
-        {% if forloop.counter <= 3 %}
-            <div class="threads">
-                <h1>{{ el.title }}</h1>
-                <p>{{ el.full_text|truncatewords:50 }}</p>
-                <div  style="text-align: right;">
-                    <a class="btn btn-dark btn-sm" href="{% url 'thread' thId=el.id %}" id="">More</a>
+        {% for el in threads %}
+            {% if forloop.counter <= 3 %}
+                <div class="threads">
+                    <h1>{{ el.title }}</h1>
+                    <p>{{ el.full_text|truncatewords:50 }}</p>
+                    <div  style="text-align: right;">
+                        <a class="btn btn-dark btn-sm" href="{% url 'thread' thId=el.id %}" id="">More</a>
+                    </div>
                 </div>
-            </div>
-        {% endif %}
-    {% endfor %}
-    <br>
-    <a href="{%url 'threads' %}" class="btn btn-dark btn-bg" id="btn2">more threads</a>
-
+            {% endif %}
+        {% endfor %}
+        <br>
+        <a href="{%url 'threads' %}" class="btn btn-dark btn-bg" id="btn2">more threads</a>
+        <br>
+    </div>
 {% endblock %}

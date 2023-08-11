@@ -1,64 +1,80 @@
 {% load custom_filters %}
-<button onclick="ShowComment()">add comment</button>
+{% load static%}
+
+<button onclick="ShowComment()" class="btn btn-secondary" id="btn2">Add comment +</button>
 <form method="post" style="display: none;" id="addComment">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Comment</button>
+    <button type="submit" class="btn btn-secondary btn-sm" id="comment_button">Comment</button>
 </form>
-
 
 {% if thread.comments.exists %}
     {% for comment in thread.comments.all %}
-        {% if comment.parent_comment %}
-            <p id="reply">{{ comment.parent_comment.text }}</p>
+
+    <div class="comment">
+
+        {% if comment.author.avatar %}
+            <img src="{{ comment.author.avatar.url }}" class="avatar2"> 
+        {% else %}
+            <img src="{% static 'main/img/user.png' %}" class="avatar2">
         {% endif %}
-        <p id="time_create">{{ comment.time_create }}</p>
-        <p id="author">{{ comment.author }}:</p>
-        <p>{{ comment.text }}</p>
+
+        <h5>{{ comment.author }}</h5>
+        <p class="small" id="time">{{ comment.time_create|date:"j.m.Y" }}</p>
+
         {% if user.is_authenticated and user == comment.author %}
-            <button onclick="ShowEditCommentForm()">Edit</button>
-            <form method="post" action="{% url 'edit_comment' thId=thread.pk commentId=comment.pk %}" style="display: none;" id="editComment">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Save Changes</button>
-            </form>
-            <form method="post" action="{% url 'delete_comment' thId=thread.pk commentId=comment.pk %}">
-                {% csrf_token %}
-                <button type="submit">Delete</button>
-            </form>
+            <div class="edit-delete-icons">
+                <button onclick="ShowEditCommentForm()" class="icon-button"><i class="fas fa-pencil-alt"></i></button>
+                <form method="post" action="{% url 'edit_comment' thId=thread.pk commentId=comment.pk %}" style="display: none;" id="editComment">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-secondary btn-sm">Save Changes</button>
+                </form>
+                <form method="post" action="{% url 'delete_comment' thId=thread.pk commentId=comment.pk %}">
+                    {% csrf_token %}
+                    <button type="submit" class="icon-button"><i class="fas fa-trash"></i></button>
+                </form>
+            </div>    
         {% endif %}
-        <button class="replyButton" onclick="ShowCommentReply('{{ comment.pk }}')">Reply</button>
+
+        {% if comment.parent_comment %}
+            <div id="parent_comment">
+                <p id="parent_comment_author">{{ comment.parent_comment.author }}:</p>
+                <p id="time"> {{ comment.parent_comment.time_create|date:"j.m.Y"}}</p>
+                <p id="parent_comment_text">{{ comment.parent_comment.text }}</p>
+            </div>
+        {% endif %}
+
+        <p id="comment_text">{{ comment.text }}</p>
+
+        Likes: {{ comment_likes|get_item:comment.pk }} <br>
+        Dislikes: {{ comment_dislikes|get_item:comment.pk }} <br>
+
         {% if user.is_authenticated %}
+        <div class="like-buttons">    
             <form method="post" action="{% url 'like_comment' thId=thread.pk %}">
                 {% csrf_token %}
                 <input type="hidden" name="like_type" value="like">
                 <input type="hidden" name="comment_id" value="{{ comment.pk }}">
-                <button type="submit">Like</button>
+                <button type="submit" class="icon-button"><i class="fas fa-thumbs-up"></i></button>
             </form>
             <form method="post" action="{% url 'like_comment' thId=thread.pk %}">
                 {% csrf_token %}
                 <input type="hidden" name="like_type" value="dislike">
                 <input type="hidden" name="comment_id" value="{{ comment.pk }}">
-                <button type="submit">Dislike</button>
+                <button type="submit" class="icon-button"><i class="fas fa-thumbs-down"></i></button>
             </form>
+        </div>
         {% endif %}
-        <p>Likes: {{ comment_likes|get_item:comment.pk }}</p>
-        <p>Dislikes: {{ comment_dislikes|get_item:comment.pk }}</p>
+        
+        <button onclick="ShowCommentReply('{{ comment.pk }}')" class="icon-button"><i class="fas fa-reply"></i></button>
+        <hr>
+    </div>
+        
     {% endfor %}
 {% else %}
-    <p id="Nocomments">No comments</p>
+    <h3 id="NoComments">No comments</h3>
 {% endif %}
-<div class="card">
-    <div class="card-header">
-      Quote
-    </div>
-    <div class="card-body">
-      <blockquote class="blockquote mb-0">
-        <p>A well-known quote, contained in a blockquote element.</p>
-        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
-    </div>
-  </div>
 
 <script>
 function ShowEditCommentForm(){

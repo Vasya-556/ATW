@@ -6,29 +6,34 @@
 
     <div class="thread">
         <h1>"{{thread.title}}"</h1>
-        <h2>by {{thread.author}} on {{thread.time_create}}</h2>
+        <h2>by {{thread.author}} on {{thread.time_create|date:"d F Y"}}</h2>
         {% if user.is_authenticated and user == thread.author %}
-            <a href="{% url 'edit_thread' thId=thread.pk %}">Edit Thread</a>
-            <p>last edited  {{thread.time_update}}</p>
-        {% endif %}
-        
-        <p>Likes: {{ likes }}</p>
-        <p>Dislikes: {{ dislikes }}</p>
-        {% if user.is_authenticated %}
-            <form method="post" action="{% url 'like_thread' thId=thread.pk %}">
-                {% csrf_token %}
-                <input type="hidden" name="like_type" value="like">
-                <button type="submit" class="like-button">Like</button>
-            </form>
-            <form method="post" action="{% url 'like_thread' thId=thread.pk %}">
-                {% csrf_token %}
-                <input type="hidden" name="like_type" value="dislike">
-                <button type="submit">Dislike</button>
-            </form>
+            <a href="{% url 'edit_thread' thId=thread.pk %}">Edit Thread <i class="fas fa-pencil-alt"></i></a>
+            <p>Last edited  {{thread.time_update}}</p>
         {% endif %}
 
-        <p>{{thread.full_text|linebreaks}}</p>
-        <div class="comment">
+        <p id="full_text">{{thread.full_text|linebreaks}}</p>
+
+        Likes: {{ likes }} <br>
+        Dislikes: {{ dislikes }}
+
+        {% if user.is_authenticated %}
+            <div class="like-buttons">    
+                <form method="post" action="{% url 'like_thread' thId=thread.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="like_type" value="like">
+                    <button type="submit" class="icon-button"><i class="fas fa-thumbs-up"></i></button>
+                </form>
+                <form method="post" action="{% url 'like_thread' thId=thread.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="like_type" value="dislike">
+                    <button type="submit" class="icon-button"><i class="fas fa-thumbs-down"></i></button>
+                </form>
+            </div>
+        {% endif %}
+        <br>
+
+        <div class="comments">
             {% include 'threads/comments.html' %}
         </div>
     </div>

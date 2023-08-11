@@ -40,13 +40,13 @@ main {
     font-weight: bold;
 }
 .topbar {
-    padding-left: 80vh;
-    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .threads {
     word-wrap: break-word;
-    margin-left: 35vh;
     margin-top: 2%;
     width: 1050px;
     border: 3px solid #BB1A2C;
@@ -63,36 +63,54 @@ main {
     text-indent: 20px;
 }
 
-.thread {
-    word-wrap: break-word;
-    margin-left: 20vh;
-    margin-right: 20vh;
-    margin-top: 2%;
-}
-
-.thread h1 {
-    display: flex;
-    justify-content: center;
-}
-
-.comment {
+.comments {
     padding: 5px;
     margin-bottom: 5px;
-    border: 2px solid salmon;
+    border: 2px solid #BB1A2C;
 }
 
-.comment #reply{
-    background-color: aliceblue;
-    margin-left: 20px; 
-    font-style: italic;
-}
-
-.comment #Nocomments {
+.comments #NoComments {
     display: flex;
     justify-content: center;   
 } 
 
-.comment #author{
+.comment {
+    padding: 5px;
+}
+
+.avatar2{
+    width: 65px;
+    height: 65px;
+    border: 1px solid #DCB21B; 
+    border-radius: 50%; 
+    object-fit: cover; 
+}
+
+.comment h5 {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.comment #time {
+    font-weight: bold;
+}
+
+#comment_button {
+    margin-bottom: 10px;
+}
+
+.comment #parent_comment{
+    padding: 5px;
+    background-color: #5b8fb8;
+}
+
+.comment #parent_comment_author{
+    font-weight: bold;
+    font-size: 30px;
+    font-style: italic;
+}
+
+.comment #parent_comment_text {
     font-style: italic;
 }
 
@@ -100,16 +118,15 @@ main {
     margin-left: 8vh;
     margin-right: 3vh;
 }
-/* 
-.delete_profile {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
 
 .editThread, .delete_thread {
     margin-left: 10vh;
+}
+
+.edit-delete-icons {
+    gap: 10px;
+    display: flex;
+    align-items: center;
 }
 
 /* 
@@ -155,6 +172,7 @@ main {
 
 .link-light {
     text-decoration: none;
+    margin-left: 15px;
 }
 
 .form-input {
@@ -215,16 +233,15 @@ main {
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 2px solid #051527; /* Синій колір рамки */
+    border: 2px solid #051527; /* колір рамки */
     background-color: #fff; /* Фоновий колір кнопки */
     outline: none;
     margin-right: 5px;
     vertical-align: middle;
 }
 
-/* Стилі для вибраної радіо-кнопки */
 .form-radio input[type="radio"]:checked {
-    background-color: #0A0F35; /* Зміна фонового кольору для вибраної кнопки */
+    background-color: #0A0F35; 
 }
 
 #btn2{
@@ -273,4 +290,114 @@ main {
     margin: 0 10px;
     text-align: center; 
     width: fit-content;
+}
+
+
+.thread {
+    padding: 10px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 1100px;
+    transform: translate(-50%, 0%);
+    word-wrap: break-word;
+    background-color: #94C4E8;
+}
+
+.thread #full_text {
+    text-indent: 20px;
+}
+
+.thread h1, .thread h2 {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+}
+
+.like-buttons {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar {
+    padding: 15px;
+}
+
+.search-bar button {
+    margin-left: 10px;
+}
+
+.threads-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-container {
+    margin: 100px auto;
+    text-align: center;
+}
+
+.pagination {
+    position: relative;
+}
+
+.pagination a {
+    position: relative;
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 8px 16px 10px;
+    transition: color 0.2s;
+}
+
+.pagination a:before {
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: "";
+    top: 0;
+    left: 0;
+    background-color: black;
+    border-radius: 24px;
+    transform: scale(0);
+    transition: all 0.2s;
+}
+
+.pagination a:hover,
+.pagination-active {
+    color: #fff;
+}
+
+.pagination a:hover:before,
+.pagination-active:before {
+    transform: scale(1);
+}
+
+.pagination-newer {
+    margin-right: 50px;
+}
+
+.pagination-older {
+    margin-left: 50px;
 }

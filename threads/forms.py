@@ -24,7 +24,7 @@ class AddNewComment(forms.ModelForm):
         model = Comment
         fields = ['text', 'parent_comment']
         widgets = {
-            'text': forms.Textarea(attrs={'cols': 150, 'rows': 15}),
+            'text': forms.Textarea(attrs={'class': 'no-resize', 'cols': 100, 'rows': 10}),
             'parent_comment': forms.HiddenInput(),
         }
 

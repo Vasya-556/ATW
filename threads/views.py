@@ -9,7 +9,7 @@ from django.db.models import Q
 import random
 
 class Threads(ListView):
-    paginate_by = 5
+    paginate_by = 10
     model = Thread
     template_name = 'threads/threads.html'
     context_object_name = 'threads'

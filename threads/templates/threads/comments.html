@@ -1,7 +1,9 @@
 {% load custom_filters %}
 {% load static%}
 
-<button onclick="ShowComment()" class="btn btn-secondary" id="btn2">Add comment +</button>
+{% if user.is_authenticated %}
+    <button onclick="ShowComment()" class="btn btn-secondary" id="btn2">Add comment +</button>
+{% endif %}
 <form method="post" style="display: none;" id="addComment">
     {% csrf_token %}
     {{ form.as_p }}
@@ -66,8 +68,11 @@
             </form>
         </div>
         {% endif %}
-        
-        <button onclick="ShowCommentReply('{{ comment.pk }}')" class="icon-button"><i class="fas fa-reply"></i></button>
+    
+        {% if user.is_authenticated %}
+            <button onclick="ShowCommentReply('{{ comment.pk }}')" class="icon-button"><i class="fas fa-reply"></i></button>
+        {% endif %}
+
         <hr>
     </div>
         

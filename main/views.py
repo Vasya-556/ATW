@@ -9,7 +9,4 @@ class ATW_Home(ListView):
     context_object_name = 'threads'
 
 def pageNotFound(request, exception):
-    return HttpResponseNotFound('<h1>Page not found:(</h1>')
-# def index(request):
-#     threads = Thread.objects.all()
-#     return render(request, 'main/main.html', {'threads': threads})
+    return render(request, 'main/pageNotFound.html')

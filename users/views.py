@@ -31,10 +31,6 @@ def profile(request):
     user = CustomUser.objects.get(pk=request.user.pk)
     return render(request, 'users/profile.html', {'user': user})
 
-def edit_profile(request):
-    user = CustomUser.objects.get(pk=request.user.pk)
-    return render(request, 'users/edit_profile.html', {'user': user})
-
 def logout_user(request):
     logout(request)
     return redirect('login')

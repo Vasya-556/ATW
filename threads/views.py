@@ -1,3 +1,5 @@
+from typing import Any
+from django.db import models
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from .models import *
@@ -7,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Q
 import random
+from django.db.models import Count
 
 class Threads(ListView):
     paginate_by = 10
@@ -21,13 +24,16 @@ class Threads(ListView):
         if search_text:
             return Thread.objects.filter(Q(title__icontains=search_text) | Q(full_text__icontains=search_text) | Q(author__username__icontains=search_text)).order_by(order_by)
 
-        return Thread.objects.order_by(order_by)
+        return Thread.objects.order_by(order_by).select_related('author')
 
 class SingleThread(DetailView):
     model = Thread
     template_name = 'threads/thread.html'
     context_object_name = 'thread'
     pk_url_kwarg = 'thId'
+
+    def get_queryset(self):
+        return Thread.objects.order_by().prefetch_related('ratings', 'comments__ratings', 'comments__author').select_related('author')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -58,19 +64,21 @@ class SingleThread(DetailView):
             like_type='dislike',
         ).count()
 
-        context['comment_likes'] = {}
-        context['comment_dislikes'] = {}
-        for comment in self.object.comments.all():
-            context['comment_likes'][comment.pk] = Rating.objects.filter(
-                liked_object_id=comment.pk,
-                liked_object_type='Comment',
-                like_type='like',
-            ).count()
-            context['comment_dislikes'][comment.pk] = Rating.objects.filter(
-                liked_object_id=comment.pk,
-                liked_object_type='Comment',
-                like_type='dislike',
-            ).count()
+        comment_ratings = Rating.objects.filter(
+            liked_object_type='Comment',
+            like_type='like',
+            liked_object_id__in=self.object.comments.all(),
+        ).values('liked_object_id').annotate(like_count=Count('liked_object_id'))
+
+        context['comment_likes'] = {rating['liked_object_id']: rating['like_count'] for rating in comment_ratings}
+
+        comment_dislikes = Rating.objects.filter(
+            liked_object_type='Comment',
+            like_type='dislike',
+            liked_object_id__in=self.object.comments.all(),
+        ).values('liked_object_id').annotate(dislike_count=Count('liked_object_id'))
+
+        context['comment_dislikes'] = {rating['liked_object_id']: rating['dislike_count'] for rating in comment_dislikes}
 
         return context
         
@@ -90,6 +98,9 @@ class EditThreadView(UpdateView):
     form_class = EditThreadForm
     context_object_name = 'thread'
     pk_url_kwarg = 'thId'
+
+    def get_queryset(self):
+        return Thread.objects.order_by().select_related('author')
 
     def get_success_url(self):
         thId = self.kwargs['thId']

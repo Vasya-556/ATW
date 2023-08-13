@@ -67,12 +67,9 @@
                 <button type="submit" class="icon-button"><i class="fas fa-thumbs-down"></i></button>
             </form>
         </div>
+        <button onclick="ShowCommentReply('{{ comment.pk }}')" class="icon-button"><i class="fas fa-reply"></i></button>
         {% endif %}
     
-        {% if user.is_authenticated %}
-            <button onclick="ShowCommentReply('{{ comment.pk }}')" class="icon-button"><i class="fas fa-reply"></i></button>
-        {% endif %}
-
         <hr>
     </div>
         

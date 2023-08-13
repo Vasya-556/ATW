@@ -22,10 +22,7 @@ Around the world Forum is an online community where travelers from all around th
 - Create and customize your user profile.
 - Start new travel-related discussions or join existing ones.
 - Share your travel itineraries and tips.
-- Upload and showcase photos from your journeys.
 - Upvote and comment on posts.
-- Private messaging system for connecting with fellow travelers.
-- Search for topics, posts, and users.
 
 ## Getting Started
 

@@ -400,3 +400,12 @@ main {
 .pagination-older {
     margin-left: 50px;
 }
+
+.contact-page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    background-color: #94C4E8;
+    padding: 10px;
+}

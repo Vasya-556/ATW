@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
+# import mimetypes
+# mimetypes.add_type("application/javascript", ".js", True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'atw.urls'
@@ -145,3 +151,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+#Debug toolbar
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+#cache
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+#         "LOCATION": os.path.join(BASE_DIR,'atw_cache'),
+#     }
+# }

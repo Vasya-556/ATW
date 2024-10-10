@@ -1,6 +1,7 @@
 # Around the world
 
 Welcome to the Around the world Forum! This forum is a place for travel enthusiasts to connect, share experiences, and inspire each other's wanderlust.
+![](image.png)
 
 ## Table of Contents
 
